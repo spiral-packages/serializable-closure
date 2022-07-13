@@ -2,6 +2,9 @@
 
 namespace VendorName\Skeleton\Tests;
 
+use Spiral\Boot\Bootloader\ConfigurationBootloader;
+use Spiral\SerializableClosure\Bootloader\SerializableClosureBootloader;
+
 class TestCase extends \Spiral\Testing\TestCase
 {
     public function rootDirectory(): string
@@ -12,9 +15,8 @@ class TestCase extends \Spiral\Testing\TestCase
     public function defineBootloaders(): array
     {
         return [
-            \Spiral\Boot\Bootloader\ConfigurationBootloader::class,
-            \VendorName\Skeleton\SkeletonBootloader::class,
-            // ...
+            ConfigurationBootloader::class,
+            SerializableClosureBootloader::class,
         ];
     }
 }
