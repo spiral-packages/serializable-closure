@@ -45,10 +45,6 @@ For example:
 
 declare(strict_types=1);
 
-use Symfony\Component\Serializer\Encoder;
-use Symfony\Component\Serializer\Normalizer;
-use Spiral\Core\Container\Autowire;
-
 return [
     'secret' => 'secret-key',
 ];
