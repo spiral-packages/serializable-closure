@@ -1,6 +1,8 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+declare(strict_types=1);
+
+namespace Spiral\SerializableClosure\Tests\Feature;
 
 use Spiral\Boot\Bootloader\ConfigurationBootloader;
 use Spiral\SerializableClosure\Bootloader\SerializableClosureBootloader;

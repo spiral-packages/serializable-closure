@@ -29,8 +29,62 @@ protected const LOAD = [
 ];
 ```
 
-> Note: if you are using [`spiral-packages/discoverer`](https://github.com/spiral-packages/discoverer),
+> **Note**
+> If you are using [`spiral-packages/discoverer`](https://github.com/spiral-packages/discoverer),
 > you don't need to register bootloader by yourself.
+
+## Configuration
+The package configuration provides the ability to set up a secret key that the 
+`Laravel\SerializableClosure\SerializableClosure` class will use for signing.
+
+Create a file `app/config/serializable-closure.php`.
+Add the `secret` parameters. 
+For example:
+```php
+<?php
+
+declare(strict_types=1);
+
+use Symfony\Component\Serializer\Encoder;
+use Symfony\Component\Serializer\Normalizer;
+use Spiral\Core\Container\Autowire;
+
+return [
+    'secret' => 'secret-key',
+];
+```
+
+## Usage
+Using with `Spiral\Serializer\SerializerManager`. 
+For example:
+```php
+use Spiral\Serializer\SerializerManager;
+
+$manager = $this->container->get(SerializerManager::class); 
+$serializer = $manager->getSerializer('closure');
+
+$result = $serializer->serialize($payload);
+$result = $serializer->unserialize($payload);
+```
+Also, you can set closure to be the default serializer in the `serializer` config file and use 
+`Spiral\Serializer\SerializerInterface`. 
+Example:
+```php
+// config serializer.php
+
+return [
+    'default' => 'closure',
+];
+
+// usage
+use Spiral\Serializer\SerializerInterface;
+
+$serializer = $this->container->get(SerializerInterface::class); 
+
+$result = $serializer->serialize($payload);
+$result = $serializer->unserialize($payload);
+```
+
 
 ## Testing
 

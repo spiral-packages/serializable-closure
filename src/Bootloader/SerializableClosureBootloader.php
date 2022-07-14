@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Spiral\SerializableClosure\Bootloader;
 
 use Spiral\Boot\Bootloader\Bootloader;
+use Spiral\Config\ConfiguratorInterface;
+use Spiral\SerializableClosure\Config\SerializableClosureConfig;
 use Spiral\SerializableClosure\Serializer;
 use Spiral\Serializer\Bootloader\SerializerBootloader;
 use Spiral\Serializer\SerializerRegistryInterface;
@@ -15,13 +17,20 @@ final class SerializableClosureBootloader extends Bootloader
         SerializerBootloader::class,
     ];
 
-    public function boot(SerializerRegistryInterface $registry): void
+    public function init(ConfiguratorInterface $configs): void
     {
-        $this->configureSerializer($registry);
+        $configs->setDefaults(SerializableClosureConfig::CONFIG, [
+            'secret' => null,
+        ]);
     }
 
-    private function configureSerializer(SerializerRegistryInterface $registry): void
+    public function boot(SerializerRegistryInterface $registry, SerializableClosureConfig $config): void
     {
-        $registry->register('closure', new Serializer());
+        $this->configureSerializer($registry, $config);
+    }
+
+    private function configureSerializer(SerializerRegistryInterface $registry, SerializableClosureConfig $config): void
+    {
+        $registry->register('closure', new Serializer($config->getSecretKey()));
     }
 }
