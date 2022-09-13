@@ -18,8 +18,7 @@
         "roave/security-advisories": "dev-latest",
         "phpunit/phpunit": "^9.5",
         "spiral/testing": "^2.0",
-        "vimeo/psalm": "^4.20",
-        "spiral/framework": "^3.0"
+        "vimeo/psalm": "^4.20"
     },
     "autoload": {
         "psr-4": {
