@@ -25,7 +25,7 @@ After package install you need to register bootloader from the package.
 ```php
 protected const LOAD = [
     // ...
-    \Spiral\SerializableClosure\SerializableClosureBootloader::class,
+    \Spiral\SerializableClosure\Bootloader\SerializableClosureBootloader::class,
 ];
 ```
 
